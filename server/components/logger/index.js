@@ -16,7 +16,7 @@ if (env === 'development') {
   loggerTransports.push(new winston.transports.File({
     level: 'info',
     name: 'all',
-    filename: `${__dirname}/../../logs/all.log`,
+    filename: `${__dirname}/../../../logs/all.log`,
     handleExceptions: true,
     maxsize: 5242880,
     maxFiles: 10,
