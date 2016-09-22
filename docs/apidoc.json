@@ -1,0 +1,8 @@
+{
+  "title": "API documentation for KOA2-Starter",
+  "order": [
+    "Health",
+    "Auth",
+    "Users"
+  ]
+}

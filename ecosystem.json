@@ -1,0 +1,55 @@
+{
+  "apps": [
+    {
+      "name": "koa2-starter",
+      "script": "./dist/server/index.js",
+      "instances": "4",
+      "watch": false,
+      "cwd": "/srv/www/koa2-starter/current",
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "watch_options": {
+        "followSymlinks": false
+      },
+      "error_file": "../shared/logs/err.log",
+      "out_file": "../shared/logs/out.log",
+      "pid_file": "../shared/pids/koa2-starter.pid",
+      "exec_mode": "cluster_mode",
+      "port": 9000,
+      "env_production": {
+        "NODE_ENV": "production"
+      },
+      "env_ci": {
+        "NODE_ENV": "ci"
+      }
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "your_user",
+      "host": [
+        {
+          "host": "your_server",
+          "port": "your_port"
+        },
+        {
+          "host": "your_server",
+          "port": "your_port"
+        }
+      ],
+      "ref": "origin/master",
+      "repo": "git@github.com:angelo-chan/koa2-starter.git",
+      "path": "/srv/www/koa2-starter",
+      "post-deploy": "make setup && make prod && make migrate-prod && pm2 startOrRestart ecosystem.json --env production"
+    },
+    "ci": {
+      "user": "your_user",
+      "host": "your_server",
+      "ref": "origin/develop",
+      "repo": "git@github.com:angelo-chan/koa2-starter.git",
+      "path": "/srv/www/koa2-starter",
+      "post-deploy": "make setup && make build && make migrate-ci && pm2 startOrRestart ecosystem.json --env ci"
+    }
+  }
+}

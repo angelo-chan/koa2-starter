@@ -1,0 +1,13 @@
+node_modules
+.tmp
+.idea
+dist
+/static/docs
+npm-debug.log
+coverage
+.DS_Store
+logs/*.log
+*.jtl
+jmeter.log
+version.json
+dump.rdb
