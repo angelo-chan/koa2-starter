@@ -26,11 +26,14 @@ export default class Sync extends EventEmitter {
 
   constructor() {
     super();
-    this.migrationFiles = fs.readdirSync(`${__dirname}/migrations`).filter((file) =>
-      file.match(/^\d+.*\.js$/)
-    ).sort().map((file) =>
-      file.toString()
-    );
+    const migrationPath = `${__dirname}/migrations`;
+    if (fs.existsSync(migrationPath)) {
+      this.migrationFiles = fs.readdirSync(`${__dirname}/migrations`).filter((file) =>
+        file.match(/^\d+.*\.js$/)
+      ).sort().map((file) =>
+        file.toString()
+      );
+    }
     this.migrations = [];
     this.count = 0;
     this.on(EVENT_LOADED, this._migrate);
@@ -42,6 +45,10 @@ export default class Sync extends EventEmitter {
   }
 
   _load() {
+    if (!this.migrationFiles) {
+      console.log('=====> no migration file exists, exit!');
+      return process.exit(0);
+    }
     const self = this;
     let last;
     let pos = -1;

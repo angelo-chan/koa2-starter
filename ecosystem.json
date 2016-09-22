@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "koa2-starter",
-      "script": "./dist/server/index.js",
+      "script": "./dist/index.js",
       "instances": "4",
       "watch": false,
       "cwd": "/srv/www/koa2-starter/current",
